@@ -1,5 +1,0 @@
-C:\@Kiln\Transact-SQL Helpers\TransactSqlHelpers\bin\Debug\TransactSqlHelpers.dll
-C:\@Kiln\Transact-SQL Helpers\TransactSqlHelpers\bin\Debug\TransactSqlHelpers.pdb
-C:\@Kiln\Transact-SQL Helpers\TransactSqlHelpers\obj\Debug\TransactSqlHelpers.csprojResolveAssemblyReference.cache
-C:\@Kiln\Transact-SQL Helpers\TransactSqlHelpers\obj\Debug\TransactSqlHelpers.dll
-C:\@Kiln\Transact-SQL Helpers\TransactSqlHelpers\obj\Debug\TransactSqlHelpers.pdb

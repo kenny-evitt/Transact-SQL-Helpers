@@ -1,9 +1,0 @@
-C:\@Kiln\Transact-SQL Helpers\Tests\bin\Debug\Tests.dll
-C:\@Kiln\Transact-SQL Helpers\Tests\bin\Debug\Tests.pdb
-C:\@Kiln\Transact-SQL Helpers\Tests\bin\Debug\nunit.framework.dll
-C:\@Kiln\Transact-SQL Helpers\Tests\bin\Debug\TransactSqlHelpers.dll
-C:\@Kiln\Transact-SQL Helpers\Tests\bin\Debug\TransactSqlHelpers.pdb
-C:\@Kiln\Transact-SQL Helpers\Tests\bin\Debug\nunit.framework.xml
-C:\@Kiln\Transact-SQL Helpers\Tests\obj\Debug\Tests.csprojResolveAssemblyReference.cache
-C:\@Kiln\Transact-SQL Helpers\Tests\obj\Debug\Tests.dll
-C:\@Kiln\Transact-SQL Helpers\Tests\obj\Debug\Tests.pdb
