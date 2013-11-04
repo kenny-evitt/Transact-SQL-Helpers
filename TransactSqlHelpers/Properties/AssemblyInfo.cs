@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("TransactSqlHelpers")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("Transact-SQL Helpers")]
+[assembly: AssemblyDescription("Transact-SQL Helper Library")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Microsoft")]
+[assembly: AssemblyCompany("Kenny Evitt")]
 [assembly: AssemblyProduct("TransactSqlHelpers")]
-[assembly: AssemblyCopyright("Copyright © Microsoft 2013")]
+[assembly: AssemblyCopyright("Copyright © Kenny Evitt")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
