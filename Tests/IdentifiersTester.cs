@@ -15,7 +15,7 @@
         [TestCase("Jānis_Bērziņš", true)]
         public void TestIfIdentifierIsRegular(string identifier, bool expectedIsRegularValue)
         {
-            Assert.AreEqual(Identifiers.IsIdentifierRegular(identifier), expectedIsRegularValue);
+            Assert.AreEqual(expectedIsRegularValue, Identifiers.IsIdentifierRegular(identifier));
         }
 
         [TestCase("Description", "Description")]
@@ -24,7 +24,7 @@
         [TestCase("Jānis_Bērziņš", "Jānis_Bērziņš")]
         public void TestIfNonRegularIdentifierIsDelimited(string identifier, string expectedValidIdentifierForm)
         {
-            Assert.AreEqual(Identifiers.ValidIdentifier(identifier), expectedValidIdentifierForm);
+            Assert.AreEqual(expectedValidIdentifierForm, Identifiers.ValidIdentifier(identifier));
         }
     }
 }
