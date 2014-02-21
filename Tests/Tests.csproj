@@ -45,6 +45,7 @@
   <ItemGroup>
     <Compile Include="IdentifiersTester.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ScriptsTester.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
