@@ -33,7 +33,10 @@ DROP SCHEMA [administrator]
 CREATE SCHEMA [administrator] AUTHORIZATION [administrator]
 " };
 
-            Assert.IsTrue(expectedBatches.SequenceEqual(Scripts.GetBatches(scriptLines)));
+            Assert.IsTrue(
+                expectedBatches.SequenceEqual(
+                    (from Batch batch in Scripts.GetBatches(scriptLines)
+                     select batch.Sql)));
         }
     }
 }
