@@ -18,22 +18,22 @@ namespace TransactSqlHelpers
         /// </summary>
         /// <param name="scriptLines"></param>
         /// <returns></returns>
-        public static IEnumerable<string> GetBatches(IEnumerable<string> scriptLines)
+        public static IEnumerable<Batch> GetBatches(IEnumerable<string> scriptLines)
         {
-            List<string> batches = new List<string>();
+            List<Batch> batches = new List<Batch>();
 
-            StringBuilder nextBatch = new StringBuilder();
+            StringBuilder nextBatchSql = new StringBuilder();
 
             foreach (string line in scriptLines)
             {
                 if (line.Trim().StartsWith("GO", System.StringComparison.InvariantCultureIgnoreCase))
                 {
-                    batches.Add(nextBatch.ToString());
-                    nextBatch.Clear();
+                    batches.Add(new Batch(nextBatchSql.ToString()));
+                    nextBatchSql.Clear();
                 }
                 else
                 {
-                    nextBatch.AppendLine(line);
+                    nextBatchSql.AppendLine(line);
                 }
             }
 
