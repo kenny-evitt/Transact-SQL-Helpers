@@ -55,6 +55,9 @@
                 lastTokenEnd = end;
             }
 
+            if (!String.IsNullOrWhiteSpace(nextBatchSql.ToString()))
+                batches.Add(new Batch(nextBatchSql.ToString()));
+
             return batches;
         }
     }
