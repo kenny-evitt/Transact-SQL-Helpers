@@ -8,8 +8,8 @@
         // Private fields
 
         private IEnumerable<Batch> _batches;
-        private IEnumerable<string> _scriptLines;
         private readonly string _scriptPath;
+        private readonly string _scriptText;
 
 
         // Public property
@@ -28,8 +28,8 @@
         public Script(string scriptPath)
         {
             _scriptPath = scriptPath;
-            _scriptLines = File.ReadAllLines(scriptPath);
-            _batches = Scripts.GetBatches(_scriptLines);
+            _scriptText = File.ReadAllText(scriptPath);
+            _batches = Scripts.GetBatches(_scriptText);
         }
     }
 }

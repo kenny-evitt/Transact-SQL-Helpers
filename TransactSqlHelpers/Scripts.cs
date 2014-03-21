@@ -1,10 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace TransactSqlHelpers
+﻿namespace TransactSqlHelpers
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using System.Text.RegularExpressions;
+
+    using Microsoft.SqlServer.Management.SqlParser.Parser;
+
     /// <summary>
     /// Encapsulates various helper methods pertaining to Transact-SQL script files, particularly
     /// script files typically used with SQL Server Management Studio and other SQL Server 
@@ -13,29 +16,47 @@ namespace TransactSqlHelpers
     public static class Scripts
     {
         /// <summary>
-        /// Generates Transact-SQL batches, suitable for execution, from the lines of a 
+        /// Generates Transact-SQL batches, suitable for execution, from the text of a 
         /// Transact-SQL script.
         /// </summary>
-        /// <param name="scriptLines"></param>
-        /// <returns></returns>
-        public static IEnumerable<Batch> GetBatches(IEnumerable<string> scriptLines)
+        /// <param name="scriptSql">Transact-SQL script text</param>
+        /// <returns>Collection of Batch objects for each batch in the supplied script</returns>
+        public static IEnumerable<Batch> GetBatches(string scriptSql)
         {
-            List<Batch> batches = new List<Batch>();
+            ParseOptions parseOptions = new ParseOptions();
+            Scanner scanner = new Scanner(parseOptions);
 
+            int state = 0,
+                start,
+                end,
+                lastTokenEnd = -1,
+                token;
+
+            bool isPairMatch, isExecAutoParamHelp;
+
+            List<Batch> batches = new List<Batch>();
             StringBuilder nextBatchSql = new StringBuilder();
 
-            foreach (string line in scriptLines)
+            scanner.SetSource(scriptSql, 0);
+
+            while ((token = scanner.GetNext(ref state, out start, out end, out isPairMatch, out isExecAutoParamHelp)) != (int)Tokens.EOF)
             {
-                if (line.Trim().StartsWith("GO", System.StringComparison.InvariantCultureIgnoreCase))
+                if ((Tokens)token == Tokens.LEX_BATCH_SEPERATOR)
                 {
+                    nextBatchSql.Append(scriptSql.Substring(lastTokenEnd + 1, start - lastTokenEnd + 1 - 1 - 1));
                     batches.Add(new Batch(nextBatchSql.ToString()));
                     nextBatchSql.Clear();
                 }
                 else
                 {
-                    nextBatchSql.AppendLine(line);
+                    nextBatchSql.Append(scriptSql.Substring(lastTokenEnd + 1, end - lastTokenEnd + 1 - 1));
                 }
+
+                lastTokenEnd = end;
             }
+
+            if (!String.IsNullOrWhiteSpace(nextBatchSql.ToString()))
+                batches.Add(new Batch(nextBatchSql.ToString()));
 
             return batches;
         }
