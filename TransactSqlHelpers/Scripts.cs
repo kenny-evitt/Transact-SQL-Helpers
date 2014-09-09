@@ -45,7 +45,11 @@
                 {
                     nextBatchSql.Append(scriptSql.Substring(lastTokenEnd + 1, start - lastTokenEnd + 1 - 1 - 1));
                     batches.Add(new Batch(nextBatchSql.ToString()));
+#if NET35
+                    nextBatchSql = new StringBuilder();
+#else
                     nextBatchSql.Clear();
+#endif
                 }
                 else
                 {
@@ -55,7 +59,11 @@
                 lastTokenEnd = end;
             }
 
+#if NET35
+            if (!String.IsNullOrEmpty(nextBatchSql.ToString().Trim()))
+#else
             if (!String.IsNullOrWhiteSpace(nextBatchSql.ToString()))
+#endif
                 batches.Add(new Batch(nextBatchSql.ToString()));
 
             return batches;
