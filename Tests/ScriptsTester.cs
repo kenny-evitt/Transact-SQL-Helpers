@@ -12,6 +12,33 @@
     public class ScriptsTester
     {
         [Test]
+        public void CanReplaceNonBreakingSpacesInSqlButNotInStringLiterals()
+        {
+            string sql = "SELECT CASE WHEN 1 = 1 THEN 'Blah blah blah'\x00a0ELSE 'Oops!' END;";
+
+            Assert.AreEqual(
+                "SELECT CASE WHEN 1 = 1 THEN 'Blah blah blah'\x0020ELSE 'Oops!' END;",
+                Scripts.ReplaceNonBreakingSpaces(sql));
+
+
+            sql = "SELECT CASE WHEN 1 = 1 THEN 'Blah\x00a0blah\x00a0blah' ELSE 'Oops!' END;";
+
+            Assert.AreEqual(
+                sql,
+                Scripts.ReplaceNonBreakingSpaces(sql));
+        }
+
+        [Test]
+        public void NonBreakingSpacesInSqlStringLiteralsAreNotReplaced()
+        {
+            string sql = "SELECT CASE WHEN 1 = 1 THEN 'Blah\x00a0blah\x00a0blah' ELSE 'Oops!' END;";
+
+            Assert.AreEqual(
+                sql,
+                Scripts.ReplaceNonBreakingSpaces(sql));
+        }
+
+        [Test]
         public void TestGetBatchesForScriptWithTwoBatches()
         {
             string script = @"IF  EXISTS (SELECT * FROM sys.schemas WHERE name = N'administrator')

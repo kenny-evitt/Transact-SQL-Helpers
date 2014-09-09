@@ -60,5 +60,47 @@
 
             return batches;
         }
+
+        public static string ReplaceNonBreakingSpaces(string scriptSql)
+        {
+            ParseOptions parseOptions = new ParseOptions();
+            Scanner scanner = new Scanner(parseOptions);
+
+            int state = 0,
+                start,
+                end,
+                lastTokenEnd = -1,
+                token;
+
+            bool isPairMatch, isExecAutoParamHelp;
+
+            StringBuilder newScriptSql = new StringBuilder();
+
+            scanner.SetSource(scriptSql, 0);
+
+            while ((token = scanner.GetNext(ref state, out start, out end, out isPairMatch, out isExecAutoParamHelp)) != (int)Tokens.EOF)
+            {
+                if (lastTokenEnd > -1)
+                    newScriptSql.Append(scriptSql.Substring(lastTokenEnd + 1, start - lastTokenEnd - 1));
+
+                string tokenSubstring = scriptSql.Substring(start, end - start + 1);
+
+                if ((Tokens)token != Tokens.TOKEN_STRING)
+                {
+                    newScriptSql.Append(tokenSubstring.Replace('\xA0', '\x20'));
+                }
+                else
+                {
+                    newScriptSql.Append(tokenSubstring);
+                }
+
+                lastTokenEnd = end;
+            }
+
+            if (lastTokenEnd + 1 < scriptSql.Length)
+                newScriptSql.Append(scriptSql.Substring(lastTokenEnd + 1));
+
+            return newScriptSql.ToString();
+        }
     }
 }
