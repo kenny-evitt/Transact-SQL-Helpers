@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>TransactSqlHelpers</id>
+    <version>$version$</version>
+    <authors>Kenny Evitt</authors>
+    <owners>Real Estate Capital Partners</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Helpers for working with Transact-SQL</description>
+    <copyright>Copyright 2014 Real Estate Capital Partners</copyright>
+    <tags></tags>
+    <dependencies>
+    </dependencies>
+  </metadata>
+</package>
