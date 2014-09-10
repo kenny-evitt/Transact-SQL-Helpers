@@ -39,6 +39,16 @@
         }
 
         [Test]
+        public void ReplacingNonBreakingSpacesDoesNotTrimSql()
+        {
+            string sql = " SELECT 'This is a test'; ";
+
+            Assert.AreEqual(
+                sql,
+                Scripts.ReplaceNonBreakingSpaces(sql));
+        }
+
+        [Test]
         public void TestGetBatchesForScriptWithTwoBatches()
         {
             string script = @"IF  EXISTS (SELECT * FROM sys.schemas WHERE name = N'administrator')

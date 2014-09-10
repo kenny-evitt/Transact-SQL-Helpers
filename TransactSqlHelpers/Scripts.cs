@@ -88,8 +88,7 @@
 
             while ((token = scanner.GetNext(ref state, out start, out end, out isPairMatch, out isExecAutoParamHelp)) != (int)Tokens.EOF)
             {
-                if (lastTokenEnd > -1)
-                    newScriptSql.Append(scriptSql.Substring(lastTokenEnd + 1, start - lastTokenEnd - 1));
+                newScriptSql.Append(scriptSql.Substring(lastTokenEnd + 1, start - lastTokenEnd - 1));
 
                 string tokenSubstring = scriptSql.Substring(start, end - start + 1);
 
