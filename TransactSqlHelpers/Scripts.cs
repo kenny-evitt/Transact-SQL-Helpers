@@ -23,6 +23,8 @@
         /// <returns>Collection of Batch objects for each batch in the supplied script</returns>
         public static IEnumerable<Batch> GetBatches(string scriptSql)
         {
+            /* This method could be rewritten to use the new `Parser.ParseSql` class method. */
+
             ParseOptions parseOptions = new ParseOptions();
             Scanner scanner = new Scanner(parseOptions);
 
@@ -71,6 +73,8 @@
 
         public static string ReplaceNonBreakingSpaces(string scriptSql)
         {
+            /* This method could be rewritten to use the new `Parser.ParseSql` class method. */
+
             ParseOptions parseOptions = new ParseOptions();
             Scanner scanner = new Scanner(parseOptions);
 
